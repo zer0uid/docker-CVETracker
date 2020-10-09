@@ -1,2 +1,6 @@
 # docker-CVETracker
-Docker Container with UMT &amp; CVE Tracker
+Project to create a Docker container with the following tools:
+
+* Ubuntu CVE Tracker
+* Ubuntu Security Tools
+* Ubuntu QA Tools
