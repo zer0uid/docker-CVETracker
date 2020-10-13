@@ -5,11 +5,14 @@ MAINTAINER zer0uid@protonmail.com
 
 # Extra metadata
 LABEL version="1.0"
-LABEL description="Docker image for CVE Tracker"
+LABEL description="Docker image for CVE Analysis"
 
 # Install required packages
 RUN apt-get update 
-RUN apt-get install -qy curl vim wget python3 python3-configobj python3-yaml python3-genshi python3-progressbar git rsync libfile-rsyncp-perl w3m debian-archive-keyring python3-apt python3-requests python3-distro-info
+RUN apt-get install --force-yes curl vim wget python3 python3-configobj python3-yaml python3-genshi python3-progressbar git rsync libfile-rsyncp-perl w3m debian-archive-keyring python3-apt python3-requests python3-distro-info
+
+# Post install cleanup
+RUN apt-get -qy autoremove
 
 # Configure git directory
 RUN cd $HOME
@@ -33,10 +36,12 @@ RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubun
 RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-security-tools.conf
 RUN ln -s $UST/build-tools/umt /bin/umt
 RUN cd $UCT;./scripts/packages-mirror
-RUN cd ~/git_pulls
+RUN cd /root/git_pulls
 
 # Clone security-tracker, this takes awhile
 RUN git clone https://salsa.debian.org/security-tracker-team/security-tracker.git
-RUN cd $UCT; ./scripts/fetch-db database.pickle.bz2
+RUN cd $UCT;./scripts/fetch-db database.pickle.bz2
 RUN $UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
+RUN cd $HOME
+RUN echo "....BUILD COMPLETE..."
