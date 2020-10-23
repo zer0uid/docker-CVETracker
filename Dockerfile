@@ -20,15 +20,15 @@ RUN mkdir ~/git-pulls
 RUN cd ~/git-pulls
 
 # Clone the required tools into /git-pulls
-RUN git clone https://git.launchpad.net/ubuntu-cve-tracker
-RUN git clone https://git.launchpad.net/ubuntu-qa-tools
-RUN git clone https://git.launchpad.net/ubuntu-security-tools
+RUN git clone git://git.launchpad.net/ubuntu-cve-tracker
+RUN git clone git://git.launchpad.net/ubuntu-qa-tools
+RUN git clone git://git.launchpad.net/ubuntu-security-tools
 
 # Set variables for each tool
 RUN echo 'export UCT="$HOME/git-pulls/ubuntu-cve-tracker"' >> ~/.bashrc
 RUN echo 'export UST="$HOME/git-pulls/ubuntu-security-tools"' >> ~/.bashrc
 RUN echo 'export UQT="$HOME/git-pulls/ubuntu-qa-tools"' >> ~/.bashrc
-RUN source ~/.bashrc
+SHELL ["/bin/bash", "-c", "source ~/.bashrc"]
 
 # Pull .conf files from github repo
 RUN cd $HOME
