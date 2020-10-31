@@ -40,10 +40,9 @@ RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubun
 RUN ln -s /root/git-pulls/ubuntu-security-tools/build-tools/umt /bin/umt
 RUN cd /root/git-pulls/ubuntu-cve-tracker/scripts
 CMD ["./packages-mirror"]
-RUN cd /root/git_pulls
 
 # Clone security-tracker, this takes awhile
-RUN git clone https://salsa.debian.org/security-tracker-team/security-tracker.git .
+RUN git -C /root/git-pulls clone https://salsa.debian.org/security-tracker-team/security-tracker.git
 RUN cd root/git-pulls/ubuntu-cve-tracker/scripts
 CMD ["./fetch-db database.pickle.bz2"]
 # This next command needs figured out
