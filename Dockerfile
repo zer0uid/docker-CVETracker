@@ -46,7 +46,7 @@ RUN git -C /root/git-pulls clone https://salsa.debian.org/security-tracker-team/
 RUN cd root/git-pulls/ubuntu-cve-tracker/scripts
 CMD ["./fetch-db database.pickle.bz2"]
 # This next command needs figured out
-RUN $UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'
+CMD ["$UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'"]
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
 RUN cd $HOME
 RUN echo "....BUILD COMPLETE..."
