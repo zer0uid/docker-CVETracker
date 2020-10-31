@@ -39,13 +39,13 @@ RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubun
 RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-security-tools.conf
 RUN ln -s /root/git-pulls/ubuntu-security-tools/build-tools/umt /bin/umt
 RUN cd /root/git-pulls/ubuntu-cve-tracker/scripts
-RUN "source packages-mirror"
+CMD ["./packages-mirror"]
 RUN cd /root/git_pulls
 
 # Clone security-tracker, this takes awhile
 RUN git clone https://salsa.debian.org/security-tracker-team/security-tracker.git .
 RUN cd root/git-pulls/ubuntu-cve-tracker/scripts
-RUN "source fetch-db database.pickle.bz2"
+CMD ["./fetch-db database.pickle.bz2"]
 # This next command needs figured out
 RUN $UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
