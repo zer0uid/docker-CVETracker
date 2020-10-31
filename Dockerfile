@@ -27,18 +27,18 @@ RUN git -C /root/git-pulls clone git://git.launchpad.net/ubuntu-qa-tools
 RUN git -C /root/git-pulls clone git://git.launchpad.net/ubuntu-security-tools
 
 # Set variables for each tool
-RUN echo 'export UCT="root/git-pulls/ubuntu-cve-tracker"' >> /root/.bashrc
-RUN echo 'export UST="root/git-pulls/ubuntu-security-tools"' >> /root/.bashrc
-RUN echo 'export UQT="root/git-pulls/ubuntu-qa-tools"' >> /root/.bashrc
+RUN echo 'export UCT="/root/git-pulls/ubuntu-cve-tracker"' >> /root/.bashrc
+RUN echo 'export UST="/root/git-pulls/ubuntu-security-tools"' >> /root/.bashrc
+RUN echo 'export UQT="/root/git-pulls/ubuntu-qa-tools"' >> /root/.bashrc
 # RUN cd /root
 # RUN "source .bashrc" (Not working yet, need to figure out how to get .bashrc updates pulled in)
 
 # Pull .conf files from github repo
-RUN cd /root
+CMD cd /root
 RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-cve-tracker.conf
 RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-security-tools.conf
 RUN ln -s /root/git-pulls/ubuntu-security-tools/build-tools/umt /bin/umt
-RUN cd /root/git-pulls/ubuntu-cve-tracker/scripts
+CMD cd /root/git-pulls/ubuntu-cve-tracker/scripts
 CMD ["./packages-mirror"]
 
 # Clone security-tracker, this takes awhile
@@ -48,5 +48,5 @@ CMD ["./fetch-db database.pickle.bz2"]
 # This next command needs figured out
 CMD ["$UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'"]
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
-RUN cd $HOME
+CMD cd $HOME
 RUN echo "....BUILD COMPLETE..."
