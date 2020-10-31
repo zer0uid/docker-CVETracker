@@ -30,7 +30,7 @@ RUN git -C /root/git-pulls clone git://git.launchpad.net/ubuntu-security-tools
 RUN echo 'export UCT="root/git-pulls/ubuntu-cve-tracker"' >> /root/.bashrc
 RUN echo 'export UST="root/git-pulls/ubuntu-security-tools"' >> /root/.bashrc
 RUN echo 'export UQT="root/git-pulls/ubuntu-qa-tools"' >> /root/.bashrc
-RUN cd /root
+# RUN cd /root
 # RUN "source .bashrc" (Not working yet, need to figure out how to get .bashrc updates pulled in)
 
 # Pull .conf files from github repo
