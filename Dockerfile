@@ -45,4 +45,5 @@ RUN /root/git-pulls/ubuntu-cve-tracker/scripts/fetch-db database.pickle.bz2
 # This next command needs figured out
 RUN $UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
+RUN apt-get update
 RUN echo "....BUILD COMPLETE..."
