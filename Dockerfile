@@ -19,7 +19,6 @@ RUN apt-get install --assume-yes curl vim wget python3 python3-configobj python3
 
 # Configure git-pulls directory, this is where CVE, QA, and Security Tools will reside [100%]
 RUN mkdir /root/git-pulls
-RUN cd /root/git-pulls
 
 # Clone the required tools into /git-pulls [100%]
 RUN git -C /root/git-pulls clone git://git.launchpad.net/ubuntu-cve-tracker
@@ -34,19 +33,16 @@ RUN echo 'export UQT="/root/git-pulls/ubuntu-qa-tools"' >> /root/.bashrc
 # RUN "source .bashrc" (Not working yet, need to figure out how to get .bashrc updates pulled in)
 
 # Pull .conf files from github repo
-CMD cd /root
-RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-cve-tracker.conf
-RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-security-tools.conf
+RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-cve-tracker.conf -P /root/
+RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-security-tools.conf -P /root/
 RUN ln -s /root/git-pulls/ubuntu-security-tools/build-tools/umt /bin/umt
-CMD cd /root/git-pulls/ubuntu-cve-tracker/scripts
-CMD ["./packages-mirror"]
+RUN /root/git-pulls/ubuntu-cve-tracker/scripts/packages-mirror
 
 # Clone security-tracker, this takes awhile
 RUN git -C /root/git-pulls clone https://salsa.debian.org/security-tracker-team/security-tracker.git
-RUN cd root/git-pulls/ubuntu-cve-tracker/scripts
-CMD ["./fetch-db database.pickle.bz2"]
+# RUN cd /root/git-pulls/ubuntu-cve-tracker/scripts
+RUN /root/git-pulls/ubuntu-cve-tracker/scripts/fetch-db database.pickle.bz2
 # This next command needs figured out
-CMD ["$UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'"]
+RUN $UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
-CMD cd $HOME
 RUN echo "....BUILD COMPLETE..."
