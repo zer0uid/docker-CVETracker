@@ -29,8 +29,6 @@ RUN git -C /root/git-pulls clone git://git.launchpad.net/ubuntu-security-tools
 RUN echo 'export UCT="/root/git-pulls/ubuntu-cve-tracker"' >> /root/.bashrc
 RUN echo 'export UST="/root/git-pulls/ubuntu-security-tools"' >> /root/.bashrc
 RUN echo 'export UQT="/root/git-pulls/ubuntu-qa-tools"' >> /root/.bashrc
-# RUN cd /root
-# RUN "source .bashrc" (Not working yet, need to figure out how to get .bashrc updates pulled in)
 
 # Pull .conf files from github repo
 RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-cve-tracker.conf -P /root/
@@ -40,9 +38,7 @@ RUN /root/git-pulls/ubuntu-cve-tracker/scripts/packages-mirror
 
 # Clone security-tracker, this takes awhile
 RUN git -C /root/git-pulls clone https://salsa.debian.org/security-tracker-team/security-tracker.git
-# RUN cd /root/git-pulls/ubuntu-cve-tracker/scripts
 RUN /root/git-pulls/ubuntu-cve-tracker/scripts/fetch-db database.pickle.bz2
-# This next command needs figured out
 RUN /root/git-pulls/ubuntu-security-tools/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
 RUN apt-get update
