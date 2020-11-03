@@ -15,7 +15,7 @@ SHELL ["/bin/bash", "-c"]
 
 # Install required packages [100%]
 RUN apt-get update 
-RUN apt-get install --assume-yes curl vim wget python3 python3-configobj python3-yaml python3-genshi python3-progressbar git rsync libfile-rsyncp-perl w3m debian-archive-keyring python3-apt python3-requests python3-distro-info apt-utils
+RUN apt-get install --assume-yes curl vim wget python3 python3-configobj python3-yaml python3-genshi python3-progressbar git rsync libfile-rsyncp-perl w3m debian-archive-keyring python3-apt python3-requests python3-distro-info apt-utils dpkg-dev
 
 # Configure git-pulls directory, this is where CVE, QA, and Security Tools will reside [100%]
 RUN mkdir /root/git-pulls
