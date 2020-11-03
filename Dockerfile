@@ -15,15 +15,18 @@ SHELL ["/bin/bash", "-c"]
 
 # Install required packages [100%]
 RUN apt-get update 
-RUN apt-get install --assume-yes curl vim wget python3 python3-configobj python3-yaml python3-genshi python3-progressbar git rsync libfile-rsyncp-perl w3m debian-archive-keyring python3-apt python3-requests python3-distro-info apt-utils dpkg-dev
+RUN apt-get install --assume-yes git
 
 # Configure git-pulls directory, this is where CVE, QA, and Security Tools will reside [100%]
 RUN mkdir /root/git-pulls
 
 # Clone the required tools into /git-pulls [100%]
+RUN git -C /root/git-pulls clone https://salsa.debian.org/security-tracker-team/security-tracker.git
 RUN git -C /root/git-pulls clone git://git.launchpad.net/ubuntu-cve-tracker
 RUN git -C /root/git-pulls clone git://git.launchpad.net/ubuntu-qa-tools
 RUN git -C /root/git-pulls clone git://git.launchpad.net/ubuntu-security-tools
+
+RUN apt-get install --assume-yes curl vim wget python3 python3-configobj python3-yaml python3-genshi python3-progressbar git rsync libfile-rsyncp-perl w3m debian-archive-keyring python3-apt python3-requests python3-distro-info apt-utils dpkg-dev
 
 # Set variables for each tool
 RUN echo 'export UCT="/root/git-pulls/ubuntu-cve-tracker"' >> /root/.bashrc
@@ -35,8 +38,6 @@ COPY .ubuntu-cve-tracker.conf /root/
 COPY .ubuntu-security-tools.conf /root/
 RUN ln -s /root/git-pulls/ubuntu-security-tools/build-tools/umt /bin/umt
 
-# Clone security-tracker, this takes awhile
-RUN git -C /root/git-pulls clone https://salsa.debian.org/security-tracker-team/security-tracker.git
 RUN /root/git-pulls/ubuntu-cve-tracker/scripts/fetch-db database.pickle.bz2
 RUN /root/git-pulls/ubuntu-security-tools/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
