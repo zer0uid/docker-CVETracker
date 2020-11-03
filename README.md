@@ -17,8 +17,8 @@ You can find the list of available Ubuntu CVE's that need triaged at https://peo
 `docker run --it zer0uid/ubuntu-cveanalysis /bin/bash`
 
 ## Option 2 - Use image from dockerhub
-* Use image from Dockerhub (https://hub.docker.com/r/zer0uid/ubuntu-cveanalysis)
-* `docker pull zer0uid/ubuntu-cveanalysis
-* `docker run --it zer0uid/ubuntu-cveanalysis /bin/bash`
+* Use image from Dockerhub (https://hub.docker.com/r/zer0uid/ubuntu-cveanalysis) <br />
+`docker pull zer0uid/ubuntu-cveanalysis` <br />
+`docker run --it zer0uid/ubuntu-cveanalysis /bin/bash` <br />
 
 ## Documentation
