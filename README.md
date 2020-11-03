@@ -22,3 +22,48 @@ You can find the list of available Ubuntu CVE's that need triaged at https://peo
 `docker run --it zer0uid/ubuntu-cveanalysis /bin/bash` <br />
 
 ## Documentation
+
+1. Use CVE Tracker to find CVE's that "needs triaged" for the following versions:
+
+**CVE Tracker URL
+https://people.canonical.com/~ubuntu-security/cve/universe.html
+
+2. What to look for?
+CVE's that impact versions: Xenial, Bionic, Focal, and Gorilla
+- Disregard Precise and Trusty
+- Skipy anything related to the kernel
+
+3. Run the command to find the available versions in Ubuntu
+`$> umt search "packag_name_without_quotes"`
+
+4. Open the CVE file to triage
+`$> cd UCT`
+`$> vim active/CVE-2020-11025 (example, changed as needed)`
+
+5. Update CVE File (Available Status: "needs-triage" "needed" "not-affected" "DNE")
+- Change "needs-triage" to "needed" or "not-affected"
+- If "not-affected", include patched version or "(code not present)"
+    Example: "not-affected" (3.2.1-4)
+- Save file
+
+6. Traige 5-10 CVE's and then commit your changes for review
+
+7. Commit changes via git
+`$> cd $UCT`
+`$> git add .`
+`$> git commit`
+- Text editor opens, add message (example: "CVE triage of Wordpress CVE's")
+
+8. Submit your patch file
+-Email patch file to mike.salvatore@canoncial.com & clairesouthwell@gmail.com
+
+* Additional Git commands:
+    `$> git add #stage new changes`
+   ` $> git format-patch -1 #creates a patch file for your last 1 commit`
+    `$> git status #shows which files have been modified`
+   ` $> git diff #shows your changes`
+    `$> git commit --amend --no-edit #edit last commit without changing message`
+
+# Configuring your identiy for git
+`$> git config --global user.email "you@example.com"`
+`$> git config --gobal user.name "your name"`
