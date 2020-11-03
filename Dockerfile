@@ -31,8 +31,8 @@ RUN echo 'export UST="/root/git-pulls/ubuntu-security-tools"' >> /root/.bashrc
 RUN echo 'export UQT="/root/git-pulls/ubuntu-qa-tools"' >> /root/.bashrc
 
 # Pull .conf files from github repo
-RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-cve-tracker.conf -P /root/
-RUN wget https://raw.githubusercontent.com/zer0uid/docker-CVEanalysis/main/.ubuntu-security-tools.conf -P /root/
+COPY .ubuntu-cve-tracker.conf /root/
+COPY .ubuntu-security-tools.conf /root/
 RUN ln -s /root/git-pulls/ubuntu-security-tools/build-tools/umt /bin/umt
 RUN /root/git-pulls/ubuntu-cve-tracker/scripts/packages-mirror
 
