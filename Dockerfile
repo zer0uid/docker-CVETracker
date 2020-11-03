@@ -49,4 +49,9 @@ RUN $UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/u
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
 
 RUN apt-get update
+
+RUN mkdir -p $HOME/.vim/syntax
+RUN ln -s $UCT/scripts/cve.vim $HOME/.vim/syntax/cve.vim
+COPY .vimrc /root/
+
 RUN echo "....BUILD COMPLETE..."
