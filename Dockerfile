@@ -44,7 +44,6 @@ COPY .ubuntu-cve-tracker.conf /root/
 COPY .ubuntu-security-tools.conf /root/
 RUN ln -s $UST/build-tools/umt /bin/umt
 
-RUN $UCT/scripts/fetch-db database.pickle.bz2
 
 RUN $UST/build-tools/build-sources-list | sh -c 'cat > /etc/apt/sources.list.d/ubuntu-security.list'
 RUN cp /usr/share/keyrings/debian-archive-keyring.gpg /etc/apt/trusted.gpg.d/
