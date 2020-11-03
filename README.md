@@ -11,7 +11,7 @@ You can find the list of available Ubuntu CVE's that need triaged at https://peo
 ## Installation Methods
 ## Option 1 - Use github repository
 * Use the dockerfile to build image locally <br/>
-`git clone --depth 1 https://github.com/zer0uid/docker-CVEanalysis.git` <br />
+`git clone https://github.com/zer0uid/docker-CVEanalysis.git` <br />
 `cd odocker-CVEanalysis` <br/>
 `docker build -t docker-CVEanalysis .` <br/>
 `docker run --it zer0uid/ubuntu-cveanalysis /bin/bash`
