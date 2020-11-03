@@ -33,11 +33,11 @@ CVE's that impact versions: Xenial, Bionic, Focal, and Gorilla
 - Disregard Precise and Trusty
 - Skipy anything related to the kernel
 
-3. Run the command to find the available versions in Ubuntu
+3. Run the command to find the available versions in Ubuntu<br />
 `$> umt search "packag_name_without_quotes"`
 
-4. Open the CVE file to triage
-`$> cd UCT`
+4. Open the CVE file to triage<br />
+`$> cd UCT`<br />
 `$> vim active/CVE-2020-11025 (example, changed as needed)`
 
 5. Update CVE File (Available Status: "needs-triage" "needed" "not-affected" "DNE")
@@ -48,22 +48,22 @@ CVE's that impact versions: Xenial, Bionic, Focal, and Gorilla
 
 6. Traige 5-10 CVE's and then commit your changes for review
 
-7. Commit changes via git
-`$> cd $UCT`
-`$> git add .`
-`$> git commit`
+7. Commit changes via git<br />
+`$> cd $UCT`<br />
+`$> git add .`<br />
+`$> git commit`<br />
 - Text editor opens, add message (example: "CVE triage of Wordpress CVE's")
 
 8. Submit your patch file
 -Email patch file to mike.salvatore@canoncial.com & clairesouthwell@gmail.com
 
-* Additional Git commands:
-    `$> git add #stage new changes`
-   ` $> git format-patch -1 #creates a patch file for your last 1 commit`
-    `$> git status #shows which files have been modified`
-   ` $> git diff #shows your changes`
+* Additional Git commands:<br />
+    `$> git add #stage new changes`<br />
+   ` $> git format-patch -1 #creates a patch file for your last 1 commit`<br />
+    `$> git status #shows which files have been modified`<br />
+   ` $> git diff #shows your changes`<br />
     `$> git commit --amend --no-edit #edit last commit without changing message`
 
-# Configuring your identiy for git
-`$> git config --global user.email "you@example.com"`
+# Configuring your identiy for git<br />
+`$> git config --global user.email "you@example.com"`<br />
 `$> git config --gobal user.name "your name"`
