@@ -34,7 +34,6 @@ RUN echo 'export UQT="/root/git-pulls/ubuntu-qa-tools"' >> /root/.bashrc
 COPY .ubuntu-cve-tracker.conf /root/
 COPY .ubuntu-security-tools.conf /root/
 RUN ln -s /root/git-pulls/ubuntu-security-tools/build-tools/umt /bin/umt
-RUN /root/git-pulls/ubuntu-cve-tracker/scripts/packages-mirror
 
 # Clone security-tracker, this takes awhile
 RUN git -C /root/git-pulls clone https://salsa.debian.org/security-tracker-team/security-tracker.git
