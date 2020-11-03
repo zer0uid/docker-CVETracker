@@ -9,6 +9,13 @@ You can find the list of available Ubuntu CVE's that need triaged at https://peo
 * Ubuntu QA Tools
 
 ## Installation Methods
+## Option 1 - Use github repository
 * Use the dockerfile to build image locally
 `docker build -t zer0uid/docker-cveanalysis .`
-* Download the image from Dockerhub via https://hub.docker.com/r/zer0uid/ubuntu-cveanalysis
+
+## Option 2 - Use image from dockerhub
+* Use image from Dockerhub (https://hub.docker.com/r/zer0uid/ubuntu-cveanalysis)
+`docker pull zer0uid/ubuntu-cveanalysis`
+`docker run --it zer0uid/ubuntu-cveanalysis /bin/bash`
+
+## Documentation
