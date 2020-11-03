@@ -13,7 +13,7 @@ You can find the list of available Ubuntu CVE's that need triaged at https://peo
 * Use the dockerfile to build image locally <br/>
 `git clone https://github.com/zer0uid/docker-CVEanalysis.git` <br />
 `cd docker-CVEanalysis` <br/>
-`docker build -t docker-CVEanalysis .` <br/>
+`sudo docker build -t zer0uid/docker-cveanalysis .` <br/>
 `docker run --it zer0uid/ubuntu-cveanalysis /bin/bash`
 
 #### Option 2 - Use image from dockerhub
