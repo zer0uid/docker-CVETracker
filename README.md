@@ -50,9 +50,6 @@ CVE's that impact versions: Xenial, Bionic, Focal, and Gorilla
 `$> git commit`<br />
 - Text editor opens, add message (example: "CVE triage of Wordpress CVE's")
 
-8. Submit your patch file
--Email patch file to mike.salvatore@canoncial.com & clairesouthwell@gmail.com
-
 * Additional Git commands:<br />
     `$> git add #stage new changes`<br />
    ` $> git format-patch -1 #creates a patch file for your last 1 commit`<br />
